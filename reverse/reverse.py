@@ -39,29 +39,20 @@ class LinkedList:
         return False
 
     def reverse_list(self, node, prev):
-        # Each item has to have it's next reversed
-        # So, for head, it's next should be none, because it's now the tail
-        # And the next one, it's next needs to be the head
-        # And the next one needs to be the one afterward
         current = node
-        previous_node = prev
+        previous = prev
+        next_node = current.next_node
         if self.head == None:
             return None
-        while current != None:
-            # Because the previous node and the current node are being passed in
-            # We can actually ignore thinking about self.head as a unique state
-            # Update previous_node to current
-            # Set the current's next to the previous one
-            # Update the current to that next item
-            print(f"Current: {current.value}")
-            next_item = current.get_next()
-            print(f"Next Item: {next_item.value}")
-            current.set_next(previous_node)
-            previous_node = current
-            print(f"New Previous Node: {previous_node.value}")
-            current = next_item
-            print(f"Updated current value: {current.value}")
-        self.head = current
+        while next_node is not None:
+            # Get the next one in the list
+            next_node = current.next_node
+            # Update pointer
+            current.set_next(previous)
+
+            # Update current and previous
+            current = next_node
+            previous = current
         
     def print_list(self):
         cur_node = self.head
